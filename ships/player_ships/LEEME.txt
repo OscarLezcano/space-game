@@ -1,0 +1,15 @@
+NAVES ELEGIBLES
+===============
+Copia aqui cualquier imagen de nave (png, jpg, webp, svg...) y aparecera sola
+en el selector del menu principal. No hay que tocar codigo ni escenas.
+
+Consejos para que se vea bien:
+- La nave debe mirar HACIA ARRIBA (la punta arriba), como la original.
+- Cualquier tamano sirve: el juego la escala al mismo tamano que la nave original.
+- Fondo transparente (png/svg) para que no se vea un cuadro alrededor.
+- El nombre que se muestra sale del nombre del archivo
+  (por ejemplo "nave_azul.png" se muestra como "Nave Azul").
+- Las naves se ordenan alfabeticamente por nombre de archivo.
+- Para quitar una nave, borra su imagen de esta carpeta.
+
+"ejemplo_roja.svg" y "ejemplo_verde.svg" son de prueba: puedes borrarlas.

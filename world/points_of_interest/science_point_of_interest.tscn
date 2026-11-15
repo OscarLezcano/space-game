@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://world/points_of_interest/science_point_of_interest.gd" id="1"]
+[ext_resource type="Resource" path="res://world/points_of_interest/point_of_interest_map_icon.tres" id="2"]
+[ext_resource type="Texture2D" path="res://world/points_of_interest/point_of_interest_marker.svg" id="3"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 220.0
+
+[node name="SciencePointOfInterest" type="Area2D" groups=["mini-map"]]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1")
+map_icon = ExtResource("2")
+
+[node name="Marker" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+scale = Vector2(0.8, 0.8)
+
+[node name="ArrivalArea" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="MapTransform" type="RemoteTransform2D" parent="."]

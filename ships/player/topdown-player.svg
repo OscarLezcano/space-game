@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="80" height="80">
+  <!-- Propulsores (3 boquillas inferiores) -->
+  <g stroke="#000000" stroke-width="14" stroke-linejoin="round">
+    <!-- Propulsor izquierdo -->
+    <path d="M 152 362 L 182 362 L 196 394 Q 198 400 190 400 L 144 400 Q 136 400 138 394 Z" fill="#E2E5EA" />
+    <!-- Propulsor central -->
+    <path d="M 241 362 L 271 362 L 285 394 Q 287 400 279 400 L 233 400 Q 225 400 227 394 Z" fill="#E2E5EA" />
+    <!-- Propulsor derecho -->
+    <path d="M 330 362 L 360 362 L 374 394 Q 376 400 368 400 L 322 400 Q 314 400 316 394 Z" fill="#E2E5EA" />
+  </g>
+
+  <!-- Llamas de propulsión -->
+  <g stroke="#000000" stroke-width="14" stroke-linejoin="round" fill="#F6BC24">
+    <!-- Llama izquierda -->
+    <path d="M 167 492 C 167 492 148 462 148 446 A 19 19 0 1 1 186 446 C 186 462 167 492 167 492 Z" />
+    <!-- Llama central -->
+    <path d="M 256 492 C 256 492 237 462 237 446 A 19 19 0 1 1 275 446 C 275 462 256 492 256 492 Z" />
+    <!-- Llama derecha -->
+    <path d="M 345 492 C 345 492 326 462 326 446 A 19 19 0 1 1 364 446 C 364 462 345 492 345 492 Z" />
+  </g>
+
+  <!-- Luz / antena superior roja -->
+  <path d="M 223 97 L 223 82 A 16 16 0 0 1 239 66 L 273 66 A 16 16 0 0 1 289 82 L 289 97 Z" fill="#F45364" stroke="#000000" stroke-width="14" stroke-linejoin="round" />
+
+  <!-- Cuerpo principal de la nave -->
+  <g>
+    <!-- Base blanca/gris muy claro -->
+    <path d="M 134 294 L 194 114 C 198 103 207 97 219 97 L 293 97 C 305 97 314 103 318 114 L 378 294 Z" fill="#E2E5EA" />
+    <!-- Sombra lateral derecha -->
+    <path d="M 278 97 L 293 97 C 305 97 314 103 318 114 L 378 294 L 348 294 L 292 114 C 289 104 284 99 278 97 Z" fill="#C9CDD4" />
+    <!-- Contorno del cuerpo principal -->
+    <path d="M 134 294 L 194 114 C 198 103 207 97 219 97 L 293 97 C 305 97 314 103 318 114 L 378 294 Z" fill="none" stroke="#000000" stroke-width="14" stroke-linejoin="round" />
+  </g>
+
+  <!-- Base inferior gris oscuro -->
+  <g>
+    <!-- Fondo gris -->
+    <path d="M 130 294 L 382 294 L 382 340 A 22 22 0 0 1 360 362 L 152 362 A 22 22 0 0 1 130 340 Z" fill="#8C8C8C" />
+    <!-- Sombra lateral derecha de la base -->
+    <path d="M 354 294 L 382 294 L 382 340 A 22 22 0 0 1 360 362 L 332 362 A 22 22 0 0 0 354 340 Z" fill="#737373" />
+    <!-- Contorno de la base -->
+    <path d="M 130 294 L 382 294 L 382 340 A 22 22 0 0 1 360 362 L 152 362 A 22 22 0 0 1 130 340 Z" fill="none" stroke="#000000" stroke-width="14" stroke-linejoin="round" />
+  </g>
+
+  <!-- Detalles de la base (3 puntos y línea horizontal) -->
+  <g fill="#000000">
+    <circle cx="160" cy="328" r="7.5" />
+    <circle cx="186" cy="328" r="7.5" />
+    <circle cx="212" cy="328" r="7.5" />
+    <rect x="276" y="321.5" width="76" height="13" rx="6.5" />
+  </g>
+
+  <!-- Ventana / cabina azul -->
+  <g>
+    <!-- Cristal azul -->
+    <path d="M 212 248 Q 198 248 202 234 L 228 156 Q 232 144 244 144 L 268 144 Q 280 144 284 156 L 310 234 Q 314 248 300 248 Z" fill="#5BB2EA" />
+    <!-- Sombra lateral derecha de la ventana -->
+    <path d="M 262 144 L 268 144 Q 280 144 284 156 L 310 234 Q 314 248 300 248 L 284 248 L 262 156 Z" fill="#479CD4" />
+    <!-- Reflejo ovalado claro -->
+    <ellipse cx="235" cy="216" rx="8.5" ry="18" transform="rotate(14 235 216)" fill="#89CBF5" />
+    <!-- Contorno de la ventana -->
+    <path d="M 212 248 Q 198 248 202 234 L 228 156 Q 232 144 244 144 L 268 144 Q 280 144 284 156 L 310 234 Q 314 248 300 248 Z" fill="none" stroke="#000000" stroke-width="14" stroke-linejoin="round" />
+  </g>
+</svg>
