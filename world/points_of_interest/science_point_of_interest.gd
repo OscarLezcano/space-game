@@ -2,6 +2,13 @@ class_name SciencePointOfInterest
 extends Area2D
 
 const GROUP := "science_points_of_interest"
+const MARKER_TEXTURES := {
+	"agujeros_negros": preload("res://world/points_of_interest/agujero_negro.png"),
+	"formacion_estelar": preload("res://world/points_of_interest/formacion_estelar.png"),
+	"exoplanetas": preload("res://world/points_of_interest/exoplaneta.png"),
+	"galaxias": preload("res://world/points_of_interest/galaxya.png"),
+}
+const MARKER_DISPLAY_SIZE := 512.0
 
 @export var map_icon: MapIcon
 
@@ -12,7 +19,16 @@ var _visited := false
 
 func _ready() -> void:
 	add_to_group(GROUP)
-	$Marker.modulate = _topic_color(topic_id)
+	var marker: Sprite2D = $Marker
+	var marker_texture: Texture2D = MARKER_TEXTURES.get(topic_id)
+	if marker_texture != null:
+		marker.texture = marker_texture
+		var texture_size := marker_texture.get_size()
+		var largest_dimension := maxf(texture_size.x, texture_size.y)
+		marker.scale = Vector2.ONE * MARKER_DISPLAY_SIZE / largest_dimension
+		marker.modulate = Color.WHITE
+	else:
+		marker.modulate = _topic_color(topic_id)
 	body_entered.connect(_on_body_entered)
 
 
