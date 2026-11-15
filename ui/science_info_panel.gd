@@ -20,11 +20,11 @@ func open_for(point: SciencePointOfInterest, is_final_point: bool = false) -> vo
 	_title.text = point.get_display_name()
 	_information.text = point.get_information()
 	_guidance.text = (
-		"Misión completada. Cierra esta ficha para volver al configurador."
+		tr("Misión completada. Cierra esta ficha para volver al configurador.")
 		if is_final_point
-		else "Punto completado. Acércate a la estación y permanece dentro de su radio para recargar energía."
+		else tr("Punto completado. Acércate a la estación y permanece dentro de su radio para recargar energía.")
 	)
-	_continue_button.text = "Volver al configurador" if is_final_point else "Continuar vuelo"
+	_continue_button.text = tr("Volver al configurador") if is_final_point else tr("Continuar vuelo")
 	show()
 	get_tree().paused = true
 	_continue_button.grab_focus()
@@ -80,12 +80,12 @@ func _build_interface() -> void:
 	content.add_child(_guidance)
 
 	var source := LinkButton.new()
-	source.text = "Fuente: NASA Webb — Build It Yourself"
+	source.text = tr("Fuente: NASA Webb — Build It Yourself")
 	source.uri = NASA_GAME_URL
 	content.add_child(source)
 
 	_continue_button = Button.new()
-	_continue_button.text = "Continuar vuelo"
+	_continue_button.text = tr("Continuar vuelo")
 	_continue_button.pressed.connect(close)
 	content.add_child(_continue_button)
 

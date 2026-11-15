@@ -41,33 +41,38 @@ func configure(science_topic_id: String, selected_wavelengths: Array[String]) ->
 
 func get_display_name() -> String:
 	var topic := _find_component(RocketDesign.SCIENCE_TOPICS, topic_id)
-	return "Punto de interés: %s" % topic.get("nombre", "Ciencia espacial")
+	return tr("Punto de interés: %s") % tr(topic.get("nombre", "Ciencia espacial"))
 
 
 func get_information() -> String:
 	var sections: Array[String] = []
 	var topic := _find_component(RocketDesign.SCIENCE_TOPICS, topic_id)
 	if not topic.is_empty():
-		sections.append(topic.get("informacion", topic["descripcion"]))
+		sections.append(tr(topic.get("informacion", topic["descripcion"])))
 
 	for wavelength_id in wavelength_ids:
 		var wavelength := _find_component(RocketDesign.WAVELENGTHS, wavelength_id)
 		if wavelength.is_empty():
 			continue
-		sections.append("Longitud de onda — %s\n%s" % [wavelength["nombre"], wavelength["informacion"]])
+		sections.append(
+			(tr("Longitud de onda — %s") % tr(wavelength["nombre"]))
+			+ "\n"
+			+ tr(wavelength["informacion"])
+		)
 
 		for instrument_id in RocketDesign.get_selected_instrument_ids(wavelength_id):
 			var instrument := _find_component(RocketDesign.INSTRUMENTS, instrument_id)
 			var optics_id: String = RocketDesign.get_selected_optics(wavelength_id, instrument_id)
 			var optics := _find_component(RocketDesign.OPTICS, optics_id)
 			sections.append(
-				"Instrumento — %s\n%s\nÓptica — %s. %s"
-				% [
-					instrument.get("nombre", instrument_id),
-					instrument.get("descripcion", ""),
-					optics.get("nombre", "Sin óptica"),
-					optics.get("informacion", ""),
-				]
+				(tr("Instrumento — %s") % tr(instrument.get("nombre", instrument_id)))
+				+ "\n"
+				+ tr(instrument.get("descripcion", ""))
+				+ "\n"
+				+ (
+					tr("Óptica — %s. %s")
+					% [tr(optics.get("nombre", "Sin óptica")), tr(optics.get("informacion", ""))]
+				)
 			)
 
 	return "\n\n".join(sections)

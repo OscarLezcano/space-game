@@ -14,6 +14,7 @@ var _totals_labels: Dictionary = {}
 var _mission_counts: Label
 var _status_label: Label
 var _launch_button: Button
+var _language_button: Button
 
 
 func _ready() -> void:
@@ -42,13 +43,23 @@ func _build_interface() -> void:
 	page.add_theme_constant_override("separation", 8)
 	margin.add_child(page)
 
+	var heading_row := HBoxContainer.new()
+	page.add_child(heading_row)
+
 	var title := Label.new()
-	title.text = "Construye tu misión espacial"
+	title.text = tr("Construye tu misión espacial")
 	title.add_theme_font_size_override("font_size", 28)
-	page.add_child(title)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading_row.add_child(title)
+
+	_language_button = Button.new()
+	_language_button.text = Localization.current_language_code()
+	_language_button.tooltip_text = tr("Cambiar idioma")
+	_language_button.pressed.connect(_on_language_button_pressed)
+	heading_row.add_child(_language_button)
 
 	var subtitle := Label.new()
-	subtitle.text = "Elige ciencia, longitudes de onda, instrumentos y ópticas. La nave incluye capacidades base fijas de energía y datos, sin subsistemas seleccionables. Las métricas de instrumentos son estimaciones de balance, no cifras oficiales de NASA; las ópticas se validan por compatibilidad, pero no tienen costo o masa asignados."
+	subtitle.text = tr("Elige ciencia, longitudes de onda, instrumentos y ópticas. La nave incluye capacidades base fijas de energía y datos, sin subsistemas seleccionables. Las métricas de instrumentos son estimaciones de balance, no cifras oficiales de NASA; las ópticas se validan por compatibilidad, pero no tienen costo o masa asignados.")
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	page.add_child(subtitle)
 
@@ -67,7 +78,7 @@ func _build_interface() -> void:
 	components_panel.add_child(component_content)
 
 	var component_heading := Label.new()
-	component_heading.text = "DISEÑO CIENTÍFICO"
+	component_heading.text = tr("DISEÑO CIENTÍFICO")
 	component_heading.add_theme_font_size_override("font_size", 18)
 	component_content.add_child(component_heading)
 
@@ -111,19 +122,19 @@ func _build_interface() -> void:
 	summary_scroll.add_child(summary)
 
 	var summary_heading := Label.new()
-	summary_heading.text = "Resumen del cohete"
+	summary_heading.text = tr("Resumen del cohete")
 	summary_heading.add_theme_font_size_override("font_size", 20)
 	summary.add_child(summary_heading)
 
 	var level_row := HBoxContainer.new()
 	summary.add_child(level_row)
 	var level_label := Label.new()
-	level_label.text = "Nivel NASA"
+	level_label.text = tr("Nivel NASA")
 	level_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	level_row.add_child(level_label)
 	_level_input = OptionButton.new()
 	for level in [1, 2, 3]:
-		_level_input.add_item("Nivel %d" % level)
+		_level_input.add_item(tr("Nivel %d") % level)
 		_level_input.set_item_metadata(level - 1, level)
 	_level_input.select(RocketDesign.level - 1)
 	_level_input.item_selected.connect(_on_level_selected)
@@ -133,7 +144,7 @@ func _build_interface() -> void:
 	_add_limit_input(summary, "Masa máxima", RocketDesign.max_mass, false)
 
 	var balance_heading := Label.new()
-	balance_heading.text = "BALANCE"
+	balance_heading.text = tr("BALANCE")
 	balance_heading.add_theme_font_size_override("font_size", 16)
 	summary.add_child(balance_heading)
 
@@ -147,7 +158,7 @@ func _build_interface() -> void:
 	_mission_counts.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	summary.add_child(_mission_counts)
 	var flight_hint := Label.new()
-	flight_hint.text = "En vuelo, abre el mapa con M y dirígete a los marcadores de ciencia."
+	flight_hint.text = tr("En vuelo, abre el mapa con M y dirígete a los marcadores de ciencia.")
 	flight_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	summary.add_child(flight_hint)
 
@@ -156,7 +167,7 @@ func _build_interface() -> void:
 	summary.add_child(_status_label)
 
 	var reference := LinkButton.new()
-	reference.text = "Fuente: NASA Webb — Build It Yourself"
+	reference.text = tr("Fuente: NASA Webb — Build It Yourself")
 	reference.uri = NASA_GAME_URL
 	summary.add_child(reference)
 
@@ -165,17 +176,17 @@ func _build_interface() -> void:
 	summary.add_child(buttons)
 
 	var reset_button := Button.new()
-	reset_button.text = "Restablecer"
+	reset_button.text = tr("Restablecer")
 	reset_button.pressed.connect(_reset_design)
 	buttons.add_child(reset_button)
 
 	var back_button := Button.new()
-	back_button.text = "Menú"
+	back_button.text = tr("Menú")
 	back_button.pressed.connect(_go_to_main_menu)
 	buttons.add_child(back_button)
 
 	_launch_button = Button.new()
-	_launch_button.text = "Lanzar misión"
+	_launch_button.text = tr("Lanzar misión")
 	_launch_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_launch_button.pressed.connect(_launch_mission)
 	buttons.add_child(_launch_button)
@@ -193,15 +204,15 @@ func _make_panel() -> PanelContainer:
 
 func _add_section_heading(parent: VBoxContainer, text: String) -> void:
 	var heading := Label.new()
-	heading.text = text
+	heading.text = tr(text)
 	heading.add_theme_font_size_override("font_size", 16)
 	parent.add_child(heading)
 
 
 func _add_topic_check(parent: VBoxContainer, topic: Dictionary) -> void:
 	var checkbox := CheckBox.new()
-	checkbox.text = topic["nombre"]
-	checkbox.tooltip_text = topic["descripcion"]
+	checkbox.text = tr(topic["nombre"])
+	checkbox.tooltip_text = tr(topic["descripcion"])
 	checkbox.set_meta("topic_id", topic["id"])
 	checkbox.toggled.connect(_on_topic_toggled.bind(topic["id"]))
 	_topic_checks[topic["id"]] = checkbox
@@ -210,7 +221,7 @@ func _add_topic_check(parent: VBoxContainer, topic: Dictionary) -> void:
 
 func _add_wavelength_check(parent: VBoxContainer, wavelength: Dictionary) -> void:
 	var checkbox := CheckBox.new()
-	checkbox.text = wavelength["nombre"]
+	checkbox.text = tr(wavelength["nombre"])
 	checkbox.set_meta("wavelength_id", wavelength["id"])
 	checkbox.toggled.connect(_on_wavelength_toggled.bind(wavelength["id"]))
 	_wavelength_checks[wavelength["id"]] = checkbox
@@ -238,7 +249,7 @@ func _rebuild_assignments() -> void:
 
 	if RocketDesign.selected_wavelengths.is_empty():
 		var hint := Label.new()
-		hint.text = "Elige primero un tema compatible y una longitud de onda."
+		hint.text = tr("Elige primero un tema compatible y una longitud de onda.")
 		hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_assignment_container.add_child(hint)
 		return
@@ -252,7 +263,7 @@ func _rebuild_assignments() -> void:
 		wavelength_panel.add_child(options)
 
 		var title := Label.new()
-		title.text = wavelength["nombre"]
+		title.text = tr(wavelength["nombre"])
 		title.add_theme_font_size_override("font_size", 15)
 		options.add_child(title)
 
@@ -275,21 +286,21 @@ func _add_instrument_option(parent: VBoxContainer, wavelength_id: String, instru
 	card.add_child(content)
 
 	var checkbox := CheckBox.new()
-	checkbox.text = instrument["nombre"]
-	checkbox.tooltip_text = instrument["descripcion"]
+	checkbox.text = tr(instrument["nombre"])
+	checkbox.tooltip_text = tr(instrument["descripcion"])
 	checkbox.button_pressed = RocketDesign.is_instrument_selected(wavelength_id, instrument_id)
 	checkbox.disabled = not RocketDesign.can_select_instrument(wavelength_id, instrument_id)
 	checkbox.toggled.connect(_on_instrument_toggled.bind(wavelength_id, instrument_id))
 	content.add_child(checkbox)
 
 	var description := Label.new()
-	description.text = instrument["descripcion"]
+	description.text = tr(instrument["descripcion"])
 	description.add_theme_font_size_override("font_size", 12)
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(description)
 
 	var metrics_heading := Label.new()
-	metrics_heading.text = "MÉTRICAS ESTIMADAS DE JUEGO"
+	metrics_heading.text = tr("MÉTRICAS ESTIMADAS DE JUEGO")
 	metrics_heading.add_theme_font_size_override("font_size", 11)
 	content.add_child(metrics_heading)
 
@@ -306,7 +317,7 @@ func _add_instrument_option(parent: VBoxContainer, wavelength_id: String, instru
 		{"label": "Ciencia", "key": "ciencia"},
 	]:
 		var metric_label := Label.new()
-		metric_label.text = "%s: %d" % [metric["label"], instrument[metric["key"]]]
+		metric_label.text = "%s: %d" % [tr(metric["label"]), instrument[metric["key"]]]
 		metric_label.add_theme_font_size_override("font_size", 12)
 		metrics.add_child(metric_label)
 
@@ -315,13 +326,13 @@ func _add_instrument_option(parent: VBoxContainer, wavelength_id: String, instru
 		optics_row.add_theme_constant_override("separation", 8)
 		content.add_child(optics_row)
 		var optics_label := Label.new()
-		optics_label.text = "Óptica"
+		optics_label.text = tr("Óptica")
 		optics_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		optics_row.add_child(optics_label)
 
 		var optics_input := OptionButton.new()
 		for optics in RocketDesign.get_available_optics(wavelength_id, instrument_id):
-			optics_input.add_item(optics["nombre"])
+			optics_input.add_item(tr(optics["nombre"]))
 			optics_input.set_item_metadata(optics_input.item_count - 1, optics["id"])
 			if optics["id"] == RocketDesign.get_selected_optics(wavelength_id, instrument_id):
 				optics_input.select(optics_input.item_count - 1)
@@ -334,7 +345,7 @@ func _add_limit_input(parent: VBoxContainer, label_text: String, value: int, is_
 	parent.add_child(row)
 
 	var label := Label.new()
-	label.text = label_text
+	label.text = tr(label_text)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 
@@ -355,31 +366,31 @@ func _add_limit_input(parent: VBoxContainer, label_text: String, value: int, is_
 
 func _update_summary() -> void:
 	var totals: Dictionary = RocketDesign.calculate_totals()
-	_totals_labels["cost"].text = "Costo: %d / %d" % [totals["cost"], RocketDesign.budget_limit]
-	_totals_labels["mass"].text = "Masa: %d / %d" % [totals["mass"], RocketDesign.max_mass]
-	_totals_labels["energy"].text = "Energía: %d / %d" % [totals["energy_used"], totals["energy_generated"]]
-	_totals_labels["data"].text = "Datos: %d / %d · Transmisión: %d / %d" % [totals["data_generated"], totals["data_capacity"], totals["data_generated"], totals["data_transmission"]]
-	_totals_labels["science"].text = "Ciencia total: %d" % totals["science"]
-	_totals_labels["speed"].text = "Velocidad máxima: %d%% de la base" % roundi(
+	_totals_labels["cost"].text = tr("Costo: %d / %d") % [totals["cost"], RocketDesign.budget_limit]
+	_totals_labels["mass"].text = tr("Masa: %d / %d") % [totals["mass"], RocketDesign.max_mass]
+	_totals_labels["energy"].text = tr("Energía: %d / %d") % [totals["energy_used"], totals["energy_generated"]]
+	_totals_labels["data"].text = tr("Datos: %d / %d · Transmisión: %d / %d") % [totals["data_generated"], totals["data_capacity"], totals["data_generated"], totals["data_transmission"]]
+	_totals_labels["science"].text = tr("Ciencia total: %d") % totals["science"]
+	_totals_labels["speed"].text = tr("Velocidad máxima: %d%% de la base") % roundi(
 		RocketDesign.get_movement_speed_multiplier() * 100.0
 	)
-	_mission_counts.text = "Nivel %d · Temas %d/%d · Ondas %d/%d · Instrumentos %d/%s" % [
+	_mission_counts.text = tr("Nivel %d · Temas %d/%d · Ondas %d/%d · Instrumentos %d/%s") % [
 		RocketDesign.level,
 		RocketDesign.selected_topics.size(),
 		RocketDesign.get_level_limit("topics"),
 		RocketDesign.selected_wavelengths.size(),
 		RocketDesign.get_level_limit("wavelengths"),
 		totals["instrument_count"],
-		"3" if RocketDesign.level == 3 else "sin límite",
+		"3" if RocketDesign.level == 3 else tr("sin límite"),
 	]
 
 	var errors: Array[String] = RocketDesign.get_validation_errors(totals)
 	_launch_button.disabled = not errors.is_empty()
 	if errors.is_empty():
-		_status_label.text = "Diseño válido. ¡Listo para lanzar!"
+		_status_label.text = tr("Diseño válido. ¡Listo para lanzar!")
 		_status_label.modulate = Color("8de0a8")
 	else:
-		_status_label.text = "Revisa el diseño:\n• " + "\n• ".join(errors)
+		_status_label.text = tr("Revisa el diseño:") + "\n• " + "\n• ".join(errors)
 		_status_label.modulate = Color("ff9a9a")
 
 
@@ -439,6 +450,11 @@ func _go_to_main_menu() -> void:
 func _launch_mission() -> void:
 	if RocketDesign.get_validation_errors().is_empty():
 		get_tree().change_scene_to_file(GAME_SCENE)
+
+
+func _on_language_button_pressed() -> void:
+	Localization.toggle_locale()
+	get_tree().call_deferred("reload_current_scene")
 
 
 func _find_component(components: Array[Dictionary], component_id: String) -> Dictionary:

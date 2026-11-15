@@ -36,30 +36,30 @@ __meta__ = {
 
 [node name="HealthUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 texture = ExtResource( 1 )
-text = "Health"
+text = "Salud"
 
 [node name="SpeedUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 offset_left = 132.0
 offset_right = 260.0
 texture = ExtResource( 3 )
-text = "Speed"
+text = "Velocidad"
 
 [node name="CargoUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 offset_left = 264.0
 offset_right = 392.0
 texture = ExtResource( 2 )
-text = "Cargo"
+text = "Carga"
 
 [node name="MiningUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 offset_left = 396.0
 offset_right = 524.0
 texture = ExtResource( 7 )
-text = "Mining"
+text = "Minería"
 
 [node name="WeaponUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 offset_left = 528.0
 offset_right = 656.0
 texture = ExtResource( 5 )
-text = "Weapon"
+text = "Arma"
 
 [node name="MenuSoundPlayer" parent="." instance=ExtResource( 8 )]

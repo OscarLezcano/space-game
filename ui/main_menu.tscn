@@ -58,7 +58,7 @@ alignment = 1
 
 [node name="Press" type="Label" parent="Context/Texts/HBoxContainer" unique_id=145135041]
 layout_mode = 2
-text = "Press"
+text = "Pulsa"
 
 [node name="CenterContainer" type="CenterContainer" parent="Context/Texts/HBoxContainer" unique_id=1421835083]
 layout_mode = 2
@@ -67,7 +67,7 @@ layout_mode = 2
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.301961, 0.65098, 1, 1)
-text = "any key"
+text = "cualquier tecla"
 
 [node name="XboxA" type="TextureRect" parent="Context/Texts/HBoxContainer/CenterContainer" unique_id=838887726]
 modulate = Color(1, 1, 1, 0)
@@ -86,7 +86,7 @@ texture = ExtResource("6")
 
 [node name="ToStart" type="Label" parent="Context/Texts/HBoxContainer" unique_id=185746759]
 layout_mode = 2
-text = "to start"
+text = "para empezar"
 
 [node name="ShipSelectorLayer" type="CanvasLayer" parent="." unique_id=2131775053]
 layer = 3

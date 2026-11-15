@@ -345,25 +345,25 @@ func get_validation_errors(totals: Dictionary = {}) -> Array[String]:
 		totals = calculate_totals()
 	var errors: Array[String] = []
 	if selected_topics.is_empty():
-		errors.append("Selecciona al menos un tema científico.")
+		errors.append(tr("Selecciona al menos un tema científico."))
 	for topic_id in selected_topics:
 		if get_selected_wavelengths_for_topic(topic_id).is_empty():
-			errors.append("El tema %s necesita una longitud de onda compatible." % _topic_name(topic_id))
+			errors.append(tr("El tema %s necesita una longitud de onda compatible.") % _topic_name(topic_id))
 	if selected_wavelengths.is_empty():
-		errors.append("Selecciona al menos una longitud de onda.")
+		errors.append(tr("Selecciona al menos una longitud de onda."))
 	for wavelength_id in selected_wavelengths:
 		if _instrument_selections.get(wavelength_id, {}).is_empty():
-			errors.append("Selecciona un instrumento para %s." % _wavelength_name(wavelength_id))
+			errors.append(tr("Selecciona un instrumento para %s.") % _wavelength_name(wavelength_id))
 	if totals["cost"] > budget_limit:
-		errors.append("El coste supera el presupuesto máximo.")
+		errors.append(tr("El coste supera el presupuesto máximo."))
 	if totals["mass"] > max_mass:
-		errors.append("La masa supera la capacidad máxima del cohete.")
+		errors.append(tr("La masa supera la capacidad máxima del cohete."))
 	if totals["energy_used"] > totals["energy_generated"]:
-		errors.append("El consumo de energía supera la energía generada.")
+		errors.append(tr("El consumo de energía supera la energía generada."))
 	if totals["data_generated"] > totals["data_capacity"]:
-		errors.append("Los datos superan la capacidad de la aviónica.")
+		errors.append(tr("Los datos superan la capacidad de la aviónica."))
 	if totals["data_generated"] > totals["data_transmission"]:
-		errors.append("Los datos superan la capacidad de transmisión.")
+		errors.append(tr("Los datos superan la capacidad de transmisión."))
 	return errors
 
 
@@ -407,12 +407,12 @@ func _find_instrument_for_wavelength(wavelength_id: String, instrument_id: Strin
 
 func _wavelength_name(wavelength_id: String) -> String:
 	var wavelength: Dictionary = _find_by_id(WAVELENGTHS, wavelength_id)
-	return wavelength.get("nombre", wavelength_id)
+	return tr(wavelength.get("nombre", wavelength_id))
 
 
 func _topic_name(topic_id: String) -> String:
 	var topic: Dictionary = _find_by_id(SCIENCE_TOPICS, topic_id)
-	return topic.get("nombre", topic_id)
+	return tr(topic.get("nombre", topic_id))
 
 
 func _add_common_totals(totals: Dictionary, component: Dictionary) -> void:

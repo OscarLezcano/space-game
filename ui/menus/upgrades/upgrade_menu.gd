@@ -14,6 +14,8 @@ extends Control
 
 
 func _ready() -> void:
+	Localization.locale_changed.connect(_on_locale_changed)
+	_on_locale_changed(Localization.locale)
 	health_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.HEALTH))
 	speed_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.SPEED))
 	cargo_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.CARGO))
@@ -22,6 +24,14 @@ func _ready() -> void:
 
 	for button in buttons:
 		button.focus_entered.connect(_on_Button_focus_entered)
+
+
+func _on_locale_changed(_locale: String) -> void:
+	health_button.text = tr("Salud")
+	speed_button.text = tr("Velocidad")
+	cargo_button.text = tr("Carga")
+	mine_button.text = tr("Minería")
+	weapon_button.text = tr("Arma")
 
 
 func open() -> void:

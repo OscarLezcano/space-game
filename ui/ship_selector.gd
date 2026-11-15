@@ -14,6 +14,7 @@ const PREVIEW_BG_COLOR := Color("171b2b")
 const MENU_THEME := preload("res://ui/theme_main_menu.tres")
 
 var _preview: TextureRect
+var _heading_label: Label
 var _name_label: Label
 var _counter_label: Label
 var _change_button: Button
@@ -26,6 +27,7 @@ func _ready() -> void:
 	_build_interface()
 	_refresh(false)
 	ShipCatalog.selection_changed.connect(_on_selection_changed)
+	Localization.locale_changed.connect(_on_locale_changed)
 
 
 func _exit_tree() -> void:
@@ -45,6 +47,7 @@ func _build_interface() -> void:
 	add_child(column)
 
 	var heading := Label.new()
+	_heading_label = heading
 	heading.text = "NAVE"
 	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	heading.add_theme_font_size_override("font_size", 16)
@@ -91,12 +94,14 @@ func _build_interface() -> void:
 func _refresh(animate: bool) -> void:
 	var index := ShipCatalog.selected_index
 	var count := ShipCatalog.get_ship_count()
+	_heading_label.text = tr("NAVE")
 	_preview.texture = ShipCatalog.get_ship_texture(index)
 	_name_label.text = ShipCatalog.get_ship_name(index)
 	_counter_label.text = "%d / %d" % [index + 1, count]
+	_change_button.text = tr("Cambiar nave")
 	_change_button.disabled = count <= 1
 	_change_button.tooltip_text = (
-		"" if count > 1 else "Agrega imágenes en res://ships/player_ships/ para tener más naves."
+		"" if count > 1 else tr("Agrega imágenes en res://ships/player_ships/ para tener más naves.")
 	)
 	if animate:
 		_play_pop()
@@ -119,3 +124,7 @@ func _on_change_pressed() -> void:
 func _on_selection_changed() -> void:
 	_refresh(true)
 	ship_changed.emit()
+
+
+func _on_locale_changed(_locale: String) -> void:
+	_refresh(false)
