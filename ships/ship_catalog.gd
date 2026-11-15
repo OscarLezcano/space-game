@@ -17,7 +17,7 @@ const SETTINGS_PATH := "user://ship_selection.cfg"
 
 
 const REFERENCE_TEXTURE_SIZE := 80.0
-const REFERENCE_SPRITE_SCALE := 1z
+const REFERENCE_SPRITE_SCALE := 1
 
 # Cada elemento: {"path": String, "name": String}
 var ships: Array[Dictionary] = []

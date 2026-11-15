@@ -1,2 +1,3 @@
 res://default_env.tres
+res://ui/main_menu.tscn
 res://ships/ship_catalog.gd

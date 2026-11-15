@@ -1,7 +1,8 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1794755796
+::res://::1794756590
 default_bus_layout.tres::AudioBusLayout::-1::1794748929::0::1::::<><><>0<>0<><>::
-default_env.tres::Environment::3540492323894971766::1794755785::0::1::::<><><>0<>0<><>::
+default_env.tres::Environment::3540492323894971766::1794755824::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1794756037::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::1332243849624092189::1794755760::1794755779::1::::<><><>0<>0<>7c570f89dcee7378f208c8e025fbb486<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 README.md::TextFile::-1::1794748929::0::1::::<><><>0<>0<><>::
 ::res://autoload/::1794753258
@@ -54,9 +55,9 @@ translations.en.translation::OptimizedTranslation::1235483942137964555::17947541
 ::res://main/::1794748929
 game.tscn::PackedScene::4004065509173113145::1794748929::0::1::::<><><>0<>0<><>::res://world/spawners/asteroid_spawner.gd<>res://world/spawners/station_spawner.gd<>uid://cjw7dyov4br6k::::res://world/docking_point/station.tscn<>uid://b07d5oc6kv45w::::res://ships/player/player_ship.tscn<>uid://b0lepns1qetft::::res://ui/minimap/map_view.tscn<>res://world/game_initializer.gd<>uid://do18uq3pp0ix7::::res://vfx/background_stars.tscn<>uid://bxv8xsooyour0::::res://main/white.png<>uid://bmrr8sydhyk0t::::res://world/shaking_camera.tscn<>res://vfx/shaders/distorted_view.gdshader<>res://world/game_world.gd<>res://ui/minimap/map_display.gd<>res://ui/menus/upgrades/upgrade_menu.tscn<>uid://b5rwtdrww00e7::::res://ui/minimap/ui_minimap_zoom_in.wav<>res://ui/ui.gd<>res://ui/menus/quit_menu.tscn<>uid://bv00wk2go2l6s::::res://ui/screen_fader.tscn<>uid://53pcfgby5by6::::res://vfx/distort_mask_view.tscn<>uid://dn2lyjt0cp57p::::res://ui/hud/hud.tscn<>res://vfx/post_process_game_view.gd<>res://ui/science_info_panel.gd
 white.png::CompressedTexture2D::4046161721940513499::1794748929::1794748929::1::::<><><>0<>0<>754feac050263cc5d499d9ac63abd9f7<>res://.godot/imported/white.png-50a47117ea01be9d1985937335859333.ctex::
-::res://ships/::1794748929
+::res://ships/::1794755819
 ship.tscn::PackedScene::250842502832228871::1794748929::0::1::::<><><>0<>0<><>::uid://dnglxou5iix8d::::res://ships/player/topdown-player.svg<>uid://debtp1yb0jkjh::::res://ships/guns/gun.tscn
-ship_catalog.gd::GDScript::6574266878204893497::1794748929::0::1::::<>Node<><>0<>0<><>::
+ship_catalog.gd::GDScript::6574266878204893497::1794755819::0::1::::<>Node<><>0<>0<><>::
 spike.svg::CompressedTexture2D::6294817228972011683::1794748929::1794748929::1::::<><><>0<>0<>729e9a44a05c271f6efa830e4b216f4d<>res://.godot/imported/spike.svg-29529ac074229e88b79a03becf6482e2.ctex::
 stats.gd::GDScript::3849996194756477619::1794748929::0::1::::Stats<>Resource<><>0<>0<><>::
 ::res://ships/enemies/::1794748929
